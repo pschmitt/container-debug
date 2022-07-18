@@ -45,8 +45,8 @@ then
     --platform "$(array_join "," "${platforms[@]}")" \
     --output "type=image,push=${PUSH_IMAGE}" \
     --no-cache \
-    --label=built-by=pschmitt \
     --label=build-type="$BUILD_TYPE" \
+    --label=built-by=pschmitt \
     --label=built-on="$HOSTNAME" \
     --tag "${IMAGE_NAME}:latest" \
     .
