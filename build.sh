@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-IMAGE_NAME="${IMAGE_NAME:-pschmitt/debug}"
-
 usage() {
   echo "Usage: $0"
 }
@@ -21,15 +19,20 @@ get_available_architectures() {
     sed 's#/$##' | sort
 }
 
+get_base_image() {
+  sed -nr '0,/^FROM/{s/^FROM (([^:]+):([^ ]+))/\2 \3/gp}' Dockerfile
+}
+
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
   set -ex
 
   cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
-  # shellcheck disable=2207
-  platforms=($(get_available_architectures python 3-alpine))
+  read -r from tag <<< "$(get_base_image)"
+  mapfile -t platforms < <(get_available_architectures "$from" "$tag")
 
+  IMAGE_NAME="${IMAGE_NAME:-pschmitt/debug}"
   PUSH_IMAGE=true
   BUILD_TYPE=manual
 
