@@ -4,8 +4,10 @@ LABEL MAINTAINER "Philipp Schmitt <philipp@schmitt.co>"
 
 RUN apk add --no-cache \
   bash \
+  curl \
   git \
   iproute2 \
+  jq \
   neovim \
   nmap \
   openssh \
