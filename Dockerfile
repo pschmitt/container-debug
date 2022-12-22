@@ -20,4 +20,4 @@ RUN apk add --no-cache \
 
 COPY ./aliases /etc/profile.d/aliases.sh
 
-ENTRYPOINT ["/bin/bash", "-l"]
+CMD ["/bin/bash"]
