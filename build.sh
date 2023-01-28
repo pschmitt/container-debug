@@ -20,7 +20,7 @@ get_available_architectures() {
 }
 
 get_base_image() {
-  sed -nr '0,/^FROM/{s/^FROM (([^:]+):([^ ]+))/\2 \3/gp}' Dockerfile
+  sed -nr '0,/^FROM/{s/^FROM (([^:]+):([^ ]+).*)/\2 \3/gp}' Dockerfile
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
@@ -29,7 +29,7 @@ then
 
   cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
-  DISABLED_ARCHITECTURES=linux/386
+  DISABLED_ARCHITECTURES="linux/386"
 
   read -r from tag <<< "$(get_base_image)"
   mapfile -t platforms < <(get_available_architectures "$from" "$tag" | \
