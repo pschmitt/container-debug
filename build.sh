@@ -29,8 +29,11 @@ then
 
   cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
+  DISABLED_ARCHITECTURES=linux/386
+
   read -r from tag <<< "$(get_base_image)"
-  mapfile -t platforms < <(get_available_architectures "$from" "$tag")
+  mapfile -t platforms < <(get_available_architectures "$from" "$tag" | \
+    grep -vE "$DISABLED_ARCHITECTURES")
 
   IMAGE_NAME="${IMAGE_NAME:-pschmitt/debug}"
   PUSH_IMAGE=true
