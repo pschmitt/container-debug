@@ -1,9 +1,15 @@
-FROM alpine:latest
+FROM alpine:latest as kubectl
 
+COPY ./install-kubectl.sh /install-kubectl.sh
+
+RUN /install-kubectl.sh
+
+FROM alpine:latest
 LABEL MAINTAINER "Philipp Schmitt <philipp@schmitt.co>"
 
+COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
+
 RUN \
-  echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
   apk add --no-cache \
     bash \
     bind-tools \
@@ -12,7 +18,6 @@ RUN \
     git \
     iproute2 \
     jq \
-    kubectl@testing \
     neovim \
     netcat-openbsd \
     nmap \
