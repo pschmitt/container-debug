@@ -15,8 +15,17 @@ get_available_architectures() {
   local tag="${2:-latest}"
 
   docker buildx imagetools inspect --raw "${image}:${tag}" | \
-    jq -r '.manifests[].platform | .os + "/" + .architecture + "/" + .variant' | \
-    sed 's#/$##' | sort
+    jq -er '.manifests[] |
+      .platform.os + "/" + .platform.architecture +
+      (
+        if (.platform | has("variant"))
+        then
+          "/" + .platform.variant
+        else
+          ""
+        end
+      )' | \
+    sort
 }
 
 get_base_image() {
