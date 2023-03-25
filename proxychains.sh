@@ -25,9 +25,9 @@ write_config() {
   local proxy_username="${PROXYCHAINS_USERNAME}"
   local proxy_password="${PROXYCHAINS_PASSWORD}"
 
-  if ! is_ip "$proxy_host"
+  if ! is_ip "$proxy_hostname"
   then
-    proxy_host="$(resolve "$proxy_host")"
+    proxy_hostname="$(resolve "$proxy_hostname")"
   fi
 
   cat << EOF > "$CONFIG_FILE"
