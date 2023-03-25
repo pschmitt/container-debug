@@ -3,6 +3,21 @@
 # Documentation:
 # https://github.com/rofl0r/proxychains-ng/blob/master/src/proxychains.conf
 
+usage() {
+  echo "Usage: $(basename "$0") [ARGS] -- COMMAND"
+  echo
+  echo "ARGS:"
+  echo
+  echo "      --hostname, -H   Proxy hostname/IP [localhost] (\$PROXYCHAINS_HOSTNAME)"
+  echo "      --port,     -P   Proxy port        [1080]      (\$PROXYCHAINS_PORT)"
+  echo "      --username, -u   Proxy username    [N/A]       (\$PROXYCHAINS_USERNAME)"
+  echo "      --password, -p   Proxy password    [N/A]       (\$PROXYCHAINS_PASSWORD)"
+  echo
+  echo "Examples:"
+  echo
+  echo "\$ $(basename "$0") --host tnl.default.svc.cluster.local --port 1080 -- curl ipinfo.io"
+}
+
 resolve() {
   # NOTE We eliminate lines matching # here because nslookup also outputs
   # the queried server
@@ -40,6 +55,44 @@ EOF
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
+  if [[ -z "$1" ]]
+  then
+    usage >&2
+    exit 2
+  fi
+
+  while [[ -n "$*" ]]
+  do
+    case "$1" in
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      --host|--hostname|-H)
+        PROXYCHAINS_HOSTNAME="$2"
+        shift 2
+        ;;
+      --port|-P)
+        PROXYCHAINS_PORT="$2"
+        shift 2
+        ;;
+      --username|--user|-u)
+        PROXYCHAINS_USERNAME="$2"
+        shift 2
+        ;;
+      --password|--pass|-p)
+        PROXYCHAINS_PASSWORD="$2"
+        shift 2
+        ;;
+      --)
+        break
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
   CONFIG_FILE="$(mktemp -t proxychains_XXXXXX)"
   trap 'rm -rf $CONFIG_FILE' EXIT
 
