@@ -30,5 +30,6 @@ RUN \
   echo "source /etc/profile" > /root/.profile
 
 COPY ./aliases /etc/profile.d/aliases.sh
+COPY ./proxychains.sh /usr/local/bin/proxychains.sh
 
 CMD ["/bin/bash"]
