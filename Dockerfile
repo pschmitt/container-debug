@@ -23,6 +23,7 @@ RUN \
     nmap \
     openssh \
     openssl \
+    proxychains-ng \
     python3 \
     py3-pip \
     yq && \
