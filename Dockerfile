@@ -26,6 +26,7 @@ RUN \
     proxychains-ng \
     python3 \
     py3-pip \
+    s3cmd \
     yq && \
   echo "source /etc/profile" > /root/.profile
 
