@@ -16,6 +16,7 @@ RUN apk add --no-cache \
     bind-tools \
     curl \
     fping \
+    fuse3 \
     git \
     iproute2 \
     jq \
