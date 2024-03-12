@@ -9,8 +9,7 @@ LABEL MAINTAINER "Philipp Schmitt <philipp@schmitt.co>"
 
 COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
-RUN \
-  apk add --no-cache \
+RUN apk add --no-cache \
     bash \
     bind-tools \
     curl \
@@ -26,9 +25,11 @@ RUN \
     proxychains-ng \
     python3 \
     py3-pip \
+    rclone \
     s3cmd \
     yq && \
-  echo "source /etc/profile" > /root/.profile
+  echo "source /etc/profile" > /root/.profile && \
+  mkdir -p /root/.ssh /root/.config/rclone
 
 COPY ./aliases /etc/profile.d/aliases.sh
 COPY ./proxychains.sh /usr/local/bin/proxychains.sh
