@@ -9,6 +9,8 @@ LABEL MAINTAINER "Philipp Schmitt <philipp@schmitt.co>"
 
 COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
+WORKDIR /root
+
 RUN apk add --no-cache \
     bash \
     bind-tools \
