@@ -42,6 +42,7 @@ RUN apk add --no-cache \
     py3-pip \
     rclone \
     s3cmd \
+    websocat \
     yq && \
   echo "source /etc/profile" > /root/.profile && \
   mkdir -p /root/.ssh /root/.config/rclone
