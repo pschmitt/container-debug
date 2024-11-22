@@ -38,10 +38,11 @@ RUN apk add --no-cache \
     openssh \
     openssl \
     proxychains-ng \
-    python3 \
     py3-pip \
+    python3 \
     rclone \
     s3cmd \
+    socat \
     websocat \
     yq && \
   echo "source /etc/profile" > /root/.profile && \
