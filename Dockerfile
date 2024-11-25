@@ -35,6 +35,7 @@ RUN apk add --no-cache \
     neovim \
     netcat-openbsd \
     nmap \
+    nmap-scripts \
     openssh \
     openssl \
     proxychains-ng \
