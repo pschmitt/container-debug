@@ -25,6 +25,7 @@ get_available_architectures() {
           ""
         end
       )' | \
+    grep -v unknown | \
     sort
 }
 
