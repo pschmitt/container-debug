@@ -2,3 +2,5 @@ alias vi="nvim"
 alias vim="nvim"
 
 alias rclone="rclone --config $HOME/.config/rclone/rclone.conf"
+
+alias k=kubectl
