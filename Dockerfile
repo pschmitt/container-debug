@@ -1,12 +1,5 @@
 # hadolint ignore=DL3007
-FROM alpine:latest AS kubectl
-
-COPY ./install-kubectl.sh /install-kubectl.sh
-
-RUN /install-kubectl.sh
-
-# hadolint ignore=DL3007
-FROM alpine:latest
+FROM alpine:edge
 
 # https://github.com/opencontainers/image-spec/blob/main/annotations.md
 LABEL org.opencontainers.image.authors="Philipp Schmitt <philipp@schmitt.co>"
@@ -17,8 +10,6 @@ LABEL org.opencontainers.image.licenses="GPL-3.0-or-later"
 LABEL org.opencontainers.image.source="https://github.com/pschmitt/container-debug"
 LABEL org.opencontainers.image.title="pschmitt's debug container"
 LABEL org.opencontainers.image.url="https://github.com/pschmitt/container-debug"
-
-COPY --from=kubectl /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 WORKDIR /root
 
@@ -32,6 +23,7 @@ RUN apk add --no-cache \
     git \
     iproute2 \
     jq \
+    kubectl \
     neovim \
     netcat-openbsd \
     nmap \
