@@ -22,6 +22,7 @@ RUN apk add --no-cache \
     fuse3 \
     git \
     iproute2 \
+    jc \
     jq \
     kubectl \
     neovim \
