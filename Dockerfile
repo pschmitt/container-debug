@@ -21,6 +21,7 @@ RUN apk add --no-cache \
     fping \
     fuse3 \
     git \
+    ipmitool \
     iproute2 \
     jc \
     jq \
