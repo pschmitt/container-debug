@@ -26,12 +26,14 @@ RUN apk add --no-cache \
     jc \
     jq \
     kubectl \
+    mysql-client \
     neovim \
     netcat-openbsd \
     nmap \
     nmap-scripts \
     openssh \
     openssl \
+    postgresql-client \
     proxychains-ng \
     py3-pip \
     python3 \
