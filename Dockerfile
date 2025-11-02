@@ -28,11 +28,13 @@ RUN apk add --no-cache \
     kubectl \
     mysql-client \
     neovim \
+    netbird \
     netcat-openbsd \
     nmap \
     nmap-scripts \
     openssh \
     openssl \
+    openrc \
     postgresql-client \
     proxychains-ng \
     py3-pip \
@@ -40,10 +42,12 @@ RUN apk add --no-cache \
     rclone \
     s3cmd \
     socat \
+    tailscale \
     websocat \
     yq && \
   echo "source /etc/profile" > /root/.profile && \
-  mkdir -p /root/.ssh /root/.config/rclone
+  mkdir -p /root/.ssh /root/.config/rclone mkdir /run/openrc && \
+  touch /run/openrc/softlevel
 
 COPY ./aliases /etc/profile.d/aliases.sh
 COPY ./proxychains.sh /usr/local/bin/proxychains.sh
