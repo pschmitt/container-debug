@@ -1,15 +1,22 @@
-name: Docker CI runtime test
+name: Build
 
 on:
+  push:
+    branches:
+      - 'main'
+  schedule:
+    - cron:  '* 18 * * *'
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   build:
+    permissions:
+      contents: read
+      packages: write
     uses: pschmitt/ci-workflows/.github/workflows/docker-build.yaml@main
     with:
       image-name: pschmitt/debug
-      platforms: linux/amd64
-      publish: false
+      platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
