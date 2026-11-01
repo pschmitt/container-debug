@@ -1,0 +1,15 @@
+name: Docker CI runtime test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: pschmitt/ci-workflows/.github/workflows/docker-build.yaml@main
+    with:
+      image-name: pschmitt/debug
+      platforms: linux/amd64
+      publish: false
